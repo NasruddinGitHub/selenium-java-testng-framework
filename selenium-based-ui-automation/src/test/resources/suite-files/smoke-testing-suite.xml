@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test Suite" verbose="10">
+    <listeners>
+        <listener class-name="com.framework.ui.automation.listeners.TestListener"></listener>
+        <listener class-name="com.framework.ui.automation.listeners.RetryListener"></listener>
+    </listeners>
+	<test name="login test cases">
+		<classes>
+			<class name="com.framework.ui.automation.tests.LoginTest"></class>
+		</classes>
+	</test>
+</suite> 
