@@ -27,6 +27,10 @@ public class ProductsPage extends BasePage {
 	public String getSelectedSortOption() {
 		return getSelectedOptionOfSelectElement(productSortContainer, 10);
 	}
+	
+	public List<String> getAllSortOptions(){
+		return getAllOptionsOfSelectElement(productSortContainer, 10);
+	}
 
 	public List<String> getProductsNames() {
 		return getAllElementsText(productsNames, 6, 10);

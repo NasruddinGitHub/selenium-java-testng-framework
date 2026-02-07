@@ -170,6 +170,16 @@ public class BasePage {
 		select.selectByValue(value);
 	}
 
+	public List<String> getAllOptionsOfSelectElement(By locator, int timeout) {
+		Select select = new Select(waitUntilElementIsVisible(locator, timeout));
+		List<WebElement> allOptions = select.getOptions();
+		List<String> allOptionsText = new LinkedList<>();
+		for (WebElement element : allOptions) {
+			allOptionsText.add(element.getText().trim());
+		}
+		return allOptionsText;
+	}
+
 	public List<String> getAllElementsText(By locator, int expectedNumberOfElements, int timeout) {
 		List<WebElement> allElements = waitUntilNumberOfElementsToBe(locator, expectedNumberOfElements, timeout);
 		List<String> allElementsText = new LinkedList<>();
