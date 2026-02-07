@@ -77,6 +77,7 @@ public class TestBase {
 		prefs.put("credentials_enable_service", false);
 		prefs.put("profile.password_manager_enabled", false);
 		prefs.put("profile.password_manager_leak_detection", false);
+		boolean incognitoFlag = Boolean.parseBoolean(ConfigReader.getProperty("incognitoMode"));
 		switch (browser.toLowerCase()) {
 		case "chrome":
 			ChromeOptions co = new ChromeOptions();
@@ -84,6 +85,9 @@ public class TestBase {
 			// Optional but useful in automation
 			co.addArguments("--disable-notifications");
 			co.addArguments("--start-maximized");
+			if (incognitoFlag) {
+				co.addArguments("--incognito");
+			}
 			driver = new ChromeDriver(co);
 			DriverManager.setDriver(driver);
 			break;
@@ -93,6 +97,9 @@ public class TestBase {
 			// Optional but useful in automation
 			eo.addArguments("--disable-notifications");
 			eo.addArguments("--start-maximized");
+			if (incognitoFlag) {
+				eo.addArguments("--inprivate");
+			}
 			driver = new EdgeDriver(eo);
 			DriverManager.setDriver(driver);
 			break;
@@ -105,14 +112,17 @@ public class TestBase {
 			// 🔹 Disable notifications
 			profile.setPreference("dom.webnotifications.enabled", false);
 			profile.setPreference("dom.push.enabled", false);
-			FirefoxOptions options = new FirefoxOptions();
-			options.setProfile(profile);
+			FirefoxOptions fo = new FirefoxOptions();
+			fo.setProfile(profile);
 			// Optional but useful in automation
-			options.addArguments("--start-maximized"); // may not always work, so maximize after launch
-			driver = new FirefoxDriver(options);
+			fo.addArguments("--start-maximized"); // may not always work, so maximize after launch
+			if (incognitoFlag) {
+				fo.addArguments("--private-window");
+			}
+			driver = new FirefoxDriver(fo);
 			DriverManager.setDriver(driver);
 			// Firefox maximize best practice
-			// threadLocalDriver.get().manage().window().maximize();
+			getTdDriver().manage().window().maximize();
 			break;
 
 		default:
@@ -125,10 +135,10 @@ public class TestBase {
 	public void flushReport() {
 		extent.flush();
 	}
-	
+
 	@AfterSuite(alwaysRun = true)
 	public void tearDown() {
-	    ExcelUtil.closeExcel();
+		ExcelUtil.closeExcel();
 	}
 
 }
