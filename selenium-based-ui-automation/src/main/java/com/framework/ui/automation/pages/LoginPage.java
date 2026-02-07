@@ -65,5 +65,11 @@ public class LoginPage extends BasePage {
 	public String getUsernamePasswordMismatchError() {
 		return getText(usernamePasswordMismatchError, 10);
 	}
+	
+	public void login(String username, String password) {
+	    typeUsername(username);
+	    typePassword(password);
+	    clickLoginButton();
+	}
 
 }
