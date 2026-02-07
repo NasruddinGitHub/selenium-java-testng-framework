@@ -78,6 +78,7 @@ public class TestBase {
 		prefs.put("profile.password_manager_enabled", false);
 		prefs.put("profile.password_manager_leak_detection", false);
 		boolean incognitoFlag = Boolean.parseBoolean(ConfigReader.getProperty("incognitoMode"));
+		boolean headlessFlag = Boolean.parseBoolean(ConfigReader.getProperty("headlessMode"));
 		switch (browser.toLowerCase()) {
 		case "chrome":
 			ChromeOptions co = new ChromeOptions();
@@ -87,6 +88,9 @@ public class TestBase {
 			co.addArguments("--start-maximized");
 			if (incognitoFlag) {
 				co.addArguments("--incognito");
+			}
+			if (headlessFlag) {
+				co.addArguments("--headless=new");
 			}
 			driver = new ChromeDriver(co);
 			DriverManager.setDriver(driver);
@@ -99,6 +103,9 @@ public class TestBase {
 			eo.addArguments("--start-maximized");
 			if (incognitoFlag) {
 				eo.addArguments("--inprivate");
+			}
+			if (headlessFlag) {
+				eo.addArguments("--headless=new");
 			}
 			driver = new EdgeDriver(eo);
 			DriverManager.setDriver(driver);
@@ -118,6 +125,9 @@ public class TestBase {
 			fo.addArguments("--start-maximized"); // may not always work, so maximize after launch
 			if (incognitoFlag) {
 				fo.addArguments("--private-window");
+			}
+			if (headlessFlag) {
+				fo.addArguments("-headless");
 			}
 			driver = new FirefoxDriver(fo);
 			DriverManager.setDriver(driver);
