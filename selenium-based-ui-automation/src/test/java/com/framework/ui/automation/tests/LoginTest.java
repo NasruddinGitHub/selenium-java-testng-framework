@@ -18,7 +18,8 @@ import com.framework.ui.automation.utils.Log;
 public class LoginTest extends TestBase {
 	private static final Logger log = Log.getLogger(BasePage.class);
 
-	@Test(description = "validate if username, password and login button fields are shown when visiting login page")
+	@Test(groups = {
+			"Smoke" }, description = "validate if username, password and login button fields are shown when visiting login page")
 	public void checkIfUsernamePasswordLoginButtonAreShown() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		boolean isUsernameFieldShown = loginPage.isUsernameFieldShown();
@@ -39,7 +40,8 @@ public class LoginTest extends TestBase {
 	}
 
 	// Happy Path
-	@Test(description = "Validate if the user is able to login with valid username and valid password")
+	@Test(groups = { "Smoke",
+			"Regression" }, description = "Validate if the user is able to login with valid username and valid password")
 	public void loginWithValidUsernameAndValidPassword() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
@@ -51,7 +53,8 @@ public class LoginTest extends TestBase {
 		Assert.assertTrue(isProductsTitleVisible);
 	}
 
-	@Test(description = "Validate if the user is able to login with invalid username and valid password")
+	@Test(groups = {
+			"Regression" }, description = "Validate if the user is able to login with invalid username and valid password")
 	public void loginWithInvalidUsernameAndValidPassword() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("invalidUsername"));
@@ -66,7 +69,8 @@ public class LoginTest extends TestBase {
 		softAssert.assertAll();
 	}
 
-	@Test(description = "Validate if the user is able to login with valid username and invalid password")
+	@Test(groups = {
+			"Regression" }, description = "Validate if the user is able to login with valid username and invalid password")
 	public void loginWithValidUsernameAndInvalidPassword() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
@@ -82,7 +86,8 @@ public class LoginTest extends TestBase {
 		Assert.fail();
 	}
 
-	@Test(description = "Validate if the user is able to login with invalid username and invalid password")
+	@Test(groups = {
+			"Regression" }, description = "Validate if the user is able to login with invalid username and invalid password")
 	public void loginWithInvalidUsernameAndInvalidPassword() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("invalidUsername"));
@@ -97,7 +102,8 @@ public class LoginTest extends TestBase {
 		softAssert.assertAll();
 	}
 
-	@Test(description = "Validate if the user is able to view error message when username is not given")
+	@Test(groups = {
+			"Regression" }, description = "Validate if the user is able to view error message when username is not given")
 	public void verifyIfErrorMessageShownWhenUsernameIsNotGiven() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typePassword(ConfigReader.getProperty("password"));
@@ -111,7 +117,8 @@ public class LoginTest extends TestBase {
 		softAssert.assertAll();
 	}
 
-	@Test(description = "Validate if the user is able to view error message when password is not given")
+	@Test(groups = { "Regression",
+			"E2E" }, description = "Validate if the user is able to view error message when password is not given")
 	public void verifyIfErrorMessageShownWhenPasswordIsNotGiven() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
@@ -125,7 +132,8 @@ public class LoginTest extends TestBase {
 		softAssert.assertAll();
 	}
 
-	@Test(description = "Validate if the user is able to view error message when username and password is not given")
+	@Test(groups = { "Regression",
+			"E2E" }, description = "Validate if the user is able to view error message when username and password is not given")
 	public void verifyIfErrorMessageShownWhenUsernameAndPasswordIsNotGiven() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.clickLoginButton();

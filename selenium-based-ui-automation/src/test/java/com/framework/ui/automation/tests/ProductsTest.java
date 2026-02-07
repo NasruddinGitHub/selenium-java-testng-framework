@@ -18,7 +18,8 @@ public class ProductsTest extends TestBase {
 
 	private static final Logger log = Log.getLogger(ProductsTest.class);
 
-	@Test(description = "Validate that the products are shown in ascending order (Name(A to Z)) by default")
+	@Test(groups = { "Smoke",
+			"Regression" }, description = "Validate that the products are shown in ascending order (Name(A to Z)) by default")
 	public void verifyIfProductsAreShownInAscendingOrderByNameByDefault() throws IOException {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
@@ -35,7 +36,8 @@ public class ProductsTest extends TestBase {
 						"Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)")));
 	}
 
-	@Test(description = "Validate that the products are shown in descending order (Name(Z to A)) when selecting Name (Z to A)")
+	@Test(groups = {
+			"Regression" }, description = "Validate that the products are shown in descending order (Name(Z to A)) when selecting Name (Z to A)")
 	public void verifyIfProductsAreShownInDescendingOrderByNameWhenSelectingNameZToA() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
@@ -49,8 +51,9 @@ public class ProductsTest extends TestBase {
 				.equals(List.of("Test.allTheThings() T-Shirt (Red)", "Sauce Labs Onesie", "Sauce Labs Fleece Jacket",
 						"Sauce Labs Bolt T-Shirt", "Sauce Labs Bike Light", "Sauce Labs Backpack")));
 	}
-	
-	@Test(description = "Validate that all the sort options are available in sort container")
+
+	@Test(groups = { "Regression",
+			"E2E" }, description = "Validate that all the sort options are available in sort container")
 	public void verifyIfAllSortOptionsAreShown() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
@@ -60,23 +63,7 @@ public class ProductsTest extends TestBase {
 		ProductsPage productsPage = new ProductsPage(getTdDriver());
 		List<String> allSortOptions = productsPage.getAllSortOptions();
 		Assert.assertTrue(allSortOptions
-				.equals(List.of("Name (A to Z)", "Name (Z to A)", "Price (low to high)",
-						"Price (high to low)")));
-	}
-
-	@Test(description = "Validate that all the sort options are available in sort container")
-	public void verifyIfAllSortOptionsAreShown1() {
-		LoginPage loginPage = new LoginPage(getTdDriver());
-		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
-		loginPage.typePassword(ConfigReader.getProperty("password"));
-		loginPage.clickLoginButton();
-
-		ProductsPage productsPage = new ProductsPage(getTdDriver());
-		List<String> allSortOptions = productsPage.getAllSortOptions();
-		Assert.assertTrue(allSortOptions
-				.equals(List.of("Name (A to Z)", "Name (Z to A)", "Price (low to high)",
-						"Price (high to low)")));
+				.equals(List.of("Name (A to Z)", "Name (Z to A)", "Price (low to high)", "Price (high to low)")));
 	}
 
 }
-

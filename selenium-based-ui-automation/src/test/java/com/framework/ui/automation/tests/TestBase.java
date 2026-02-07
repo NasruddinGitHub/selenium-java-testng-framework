@@ -31,30 +31,30 @@ public class TestBase {
 	protected WebDriver driver;
 	protected static ExtentReports extent;
 
-	@BeforeSuite
+	@BeforeSuite(alwaysRun = true)
 	public void setupReport() {
 		extent = ExtentManager.getInstance();
 	}
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void startTest(Method method) {
 		ExtentTest test = extent.createTest(method.getName());
 		ExtentTestManager.setTest(test);
 	}
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void setUp() {
 		String browser = ConfigReader.getProperty("browser");
 		invokeBrowser(browser);
 		getTdDriver().get(ConfigReader.getProperty("url"));
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void quitBrowser() {
 		getTdDriver().quit();
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void endTest(ITestResult result) {
 		if (result.getStatus() == ITestResult.FAILURE) {
 			ExtentTestManager.getTest().fail(result.getThrowable());
@@ -121,7 +121,7 @@ public class TestBase {
 		}
 	}
 
-	@AfterSuite
+	@AfterSuite(alwaysRun = true)
 	public void flushReport() {
 		extent.flush();
 	}
