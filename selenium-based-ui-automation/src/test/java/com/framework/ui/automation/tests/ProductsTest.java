@@ -61,7 +61,7 @@ public class ProductsTest extends TestBase {
 		List<String> allSortOptions = productsPage.getAllSortOptions();
 		Assert.assertTrue(allSortOptions
 				.equals(List.of("Name (A to Z)", "Name (Z to A)", "Price (low to high)",
-						"Price (high to low)", "Sauce Labs Bike Light", "Sauce Labs Backpack")));
+						"Price (high to low)")));
 	}
 
 }
