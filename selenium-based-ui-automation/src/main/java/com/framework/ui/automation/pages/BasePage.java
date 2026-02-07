@@ -1,8 +1,10 @@
 package com.framework.ui.automation.pages;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -188,5 +190,24 @@ public class BasePage {
 		}
 		return allElementsText;
 	}
+	
+	public <T> List<T> getAllElements(
+	        By locator,
+	        int expectedNumberOfElements,
+	        int timeout,
+	        Function<String, T> mapper) {
+
+	    List<WebElement> allElements =
+	            waitUntilNumberOfElementsToBe(locator, expectedNumberOfElements, timeout);
+
+	    List<T> result = new ArrayList<>();
+
+	    for (WebElement element : allElements) {
+	        String text = element.getText().trim();
+	        result.add(mapper.apply(text));
+	    }
+	    return result;
+	}
+
 
 }

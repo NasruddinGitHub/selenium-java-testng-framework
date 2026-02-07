@@ -55,7 +55,7 @@ public class LoginTest extends TestBase {
 
 	@Test(groups = {
 			"Regression" }, description = "Validate if the user is able to login with invalid username and valid password")
-	public void loginWithInvalidUsernameAndValidPassword() throws IOException {
+	public void loginWithInvalidUsernameAndValidPassword() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("invalidUsername"));
 		loginPage.typePassword(ConfigReader.getProperty("password"));
@@ -71,7 +71,7 @@ public class LoginTest extends TestBase {
 
 	@Test(groups = {
 			"Regression" }, description = "Validate if the user is able to login with valid username and invalid password")
-	public void loginWithValidUsernameAndInvalidPassword() throws IOException {
+	public void loginWithValidUsernameAndInvalidPassword() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
 		loginPage.typePassword(ConfigReader.getProperty("invalidPassword"));
@@ -88,7 +88,7 @@ public class LoginTest extends TestBase {
 
 	@Test(groups = {
 			"Regression" }, description = "Validate if the user is able to login with invalid username and invalid password")
-	public void loginWithInvalidUsernameAndInvalidPassword() throws IOException {
+	public void loginWithInvalidUsernameAndInvalidPassword() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("invalidUsername"));
 		loginPage.typePassword(ConfigReader.getProperty("invalidPassword"));
@@ -104,7 +104,7 @@ public class LoginTest extends TestBase {
 
 	@Test(groups = {
 			"Regression" }, description = "Validate if the user is able to view error message when username is not given")
-	public void verifyIfErrorMessageShownWhenUsernameIsNotGiven() throws IOException {
+	public void verifyIfErrorMessageShownWhenUsernameIsNotGiven() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typePassword(ConfigReader.getProperty("password"));
 		loginPage.clickLoginButton();
@@ -119,7 +119,7 @@ public class LoginTest extends TestBase {
 
 	@Test(groups = { "Regression",
 			"E2E" }, description = "Validate if the user is able to view error message when password is not given")
-	public void verifyIfErrorMessageShownWhenPasswordIsNotGiven() throws IOException {
+	public void verifyIfErrorMessageShownWhenPasswordIsNotGiven() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
 		loginPage.clickLoginButton();
@@ -134,7 +134,7 @@ public class LoginTest extends TestBase {
 
 	@Test(groups = { "Regression",
 			"E2E" }, description = "Validate if the user is able to view error message when username and password is not given")
-	public void verifyIfErrorMessageShownWhenUsernameAndPasswordIsNotGiven() throws IOException {
+	public void verifyIfErrorMessageShownWhenUsernameAndPasswordIsNotGiven() {
 		LoginPage loginPage = new LoginPage(getTdDriver());
 		loginPage.clickLoginButton();
 		boolean isUsernameRequiredErrorShown = loginPage.isUsernameRequiredErrorShown();
