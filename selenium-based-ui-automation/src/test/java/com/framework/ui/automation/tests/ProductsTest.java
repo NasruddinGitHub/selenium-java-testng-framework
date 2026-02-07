@@ -64,4 +64,19 @@ public class ProductsTest extends TestBase {
 						"Price (high to low)")));
 	}
 
+	@Test(description = "Validate that all the sort options are available in sort container")
+	public void verifyIfAllSortOptionsAreShown1() {
+		LoginPage loginPage = new LoginPage(getTdDriver());
+		loginPage.typeUsername(ConfigReader.getProperty("standardUsername"));
+		loginPage.typePassword(ConfigReader.getProperty("password"));
+		loginPage.clickLoginButton();
+
+		ProductsPage productsPage = new ProductsPage(getTdDriver());
+		List<String> allSortOptions = productsPage.getAllSortOptions();
+		Assert.assertTrue(allSortOptions
+				.equals(List.of("Name (A to Z)", "Name (Z to A)", "Price (low to high)",
+						"Price (high to low)")));
+	}
+
 }
+
